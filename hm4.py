@@ -127,3 +127,13 @@ print(best_lecturer.grades)
 
 print(best_lecturer.__lt__(some_lecturer))
 print(best_student.__lt__(some_student))
+
+def avg_grade_curs(students, course):
+    rates = []
+    for student in students:
+        if student[course]:
+            rates.extend(student[course])
+    return round(sum(rates) / len(rates), 2)
+
+
+print(avg_grade_curs(student_list, course='Git'))
