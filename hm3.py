@@ -18,28 +18,14 @@ class Student:
             else:
                 lecturer.grades[course] = [grade]
         else:
-            return 'Ошибка'
+            return 'Ошибка' 
 
-    def __str__(self, name , surname): # строка
-        res = f'Имя: {name} \nФамилия: {surname} \nСредняя оценка за лекции: {self.grades} \nКурсы в процессе изучения:{self.courses_in_progress} \nЗавершенные курсы: {self.finished_courses}'
-        return res
-
-student_list = [best_student, some_student]
-
-    def average_rat_stud(students, course): # средняя оценка
-        _sum = []
-        for student in student_list:
-            if isinstance(student, Student) and course in student.grades:
-                _sum.extend(student.grades[course])
-            else:
-                print('Error.')
-                return
-        return f'Средняя оценка студентов по {course}: {round(sum(_sum) / len(_sum), 2)}'
-
-print(average_rat_stud(student_list, 'Python'))
-
-    def __lt__(self, other):
-
+  # def __str__(self):
+    #     res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за ДЗ: ' \
+    #           f'{self.middle()} \nИзучаемые курсы: {self.courses_in_progress}' \
+    #           f'\nПройденные курсы: {self.finished_courses}'
+    #     return res
+ 
 class Mentor:
     def __init__(self, name, surname): # инициализация
         self.name = name
@@ -47,44 +33,37 @@ class Mentor:
         self.courses_attached = []
         
 class Lecturer(Mentor):
-    def __init__(self, name, surname): # инициализация
-        super().__init__(name, surname)
-        self.courses_attached = []
+    def __init__(self, name, surname, gender): # инициализация
+        self.name = name
+        self.surname = surname
+        self.gender = gender
+        self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
 
-    def _aver_rating(self): # средний балл
-        _sum = 0
+    # def _aver_rating(self): # средний балл
+    #     _sum = 0
+    #     counter = 0
+    #     for value in self.grades.values():
+    #         for i in value:
+    #             _sum += i
+    #             counter += 1
+    #     return round(_sum / counter, 2)
+
+    def middle(self):
+        total = 0
         counter = 0
         for value in self.grades.values():
             for i in value:
-                _sum += i
+                total += i
                 counter += 1
-            return round(_sum / counter, 2)
+        if counter != 0:
+            res = round(total / counter, 2)
+            return res
 
     def __str__(self): # строка
-        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self._aver_rating()}'
+        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.middle()}'
         return res
-
-lecturer_list = [best_lecturer, some_lecturer]
-
-    def __lt__(self, other): # 
-        if not isinstance(other, Lecturer):
-            print('Не является экземляром класса Lecturer.')
-            return
-        return self._aver_rating() < other._aver_rating
-
-    def average_rat_stud(lecturers, course): #
-        _sum = []
-        for lecturer in lecturer_list:
-            if isinstance(lecturer, Lecturers) and course in lecturer.grades:
-                _sum.extend(lecturer.grades[course])
-            else:
-                print('Error.')
-                return
-        return f'Средняя оценка студентов по {course}: {round(sum(_sum) / len(_sum), 2)}'
-
-print(average_rat_stud(lecturer_list, 'Python'))
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade): # оценка
@@ -96,10 +75,10 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
-    def __str__(self, name , surname): # строка
-        res = f'Имя: {name} \nФамилия: {surname}'
+    def __str__(self):
+        res = f'Имя: {self.name} \nФамилия: {self.surname}'
         return res
-
+ 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
  
@@ -110,7 +89,7 @@ cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'Python', 10)
  
-print(best_student.grades)
+# print(best_student.grades)
 
 
 best_lecturer = Lecturer('Ruoy', 'Eman', 'your_gender')
@@ -125,5 +104,14 @@ cool_student.rate_hw(best_lecturer, 'Python', 10)
  
 print(best_lecturer.grades)
 
-print(best_lecturer.__lt__(some_lecturer))
-print(best_student.__lt__(some_student))
+print(Reviewer('Вася', 'Пупкин'))
+
+print(Lecturer('Виктор', 'Кононенко', 'муж'))
+
+# Reviewer.courses_in_progress = 'JavaScript'
+
+# Reviewer.courses_in_progress = 'Основы программирования'
+
+# print(Reviewer('Иван', 'Болдырев', 'муж', courses_in_progress, courses_in_progress))
+
+print(best_lecturer)

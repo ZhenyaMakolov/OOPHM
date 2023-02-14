@@ -1,23 +1,23 @@
 class Student:
-    def __init__(self, name, surname, gender):
+    def __init__(self, name, surname, gender): # инициализация
         self.name = name
         self.surname = surname
         self.gender = gender
-        self.finished_courses = []
-        self.courses_in_progress = []
-        self.grades = {}
+        self.finished_courses = [] # завершенные курсы
+        self.courses_in_progress = [] # курсы в прогрессе
+        self.grades = {} # оценки
  
-    def add_courses(self, course_name):
+    def add_courses(self, course_name): # добавить курсы
         self.finished_courses.append(course_name)   
  
      
 class Mentor:
-    def __init__(self, name, surname):
+    def __init__(self, name, surname): # инициализация
         self.name = name
         self.surname = surname
-        self.courses_attached = []
+        self.courses_attached = [] # подключенные курсы
         
-    def rate_hw(self, student, course, grade):
+    def rate_hw(self, student, course, grade): # оценка
         if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
             if course in student.grades:
                 student.grades[course] += [grade]
